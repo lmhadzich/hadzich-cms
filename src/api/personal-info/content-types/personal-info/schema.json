@@ -1,0 +1,40 @@
+{
+  "kind": "singleType",
+  "collectionName": "personal_infos",
+  "info": {
+    "singularName": "personal-info",
+    "pluralName": "personal-infos",
+    "displayName": "personal-info"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "bio": {
+      "type": "blocks"
+    },
+    "social_links": {
+      "type": "json"
+    },
+    "avatar": {
+      "type": "media",
+      "multiple": true,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "skill_tags": {
+      "type": "json"
+    },
+    "email": {
+      "type": "email"
+    }
+  }
+}
