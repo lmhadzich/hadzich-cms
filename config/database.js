@@ -1,23 +1,18 @@
-const { parse } = require("pg-connection-string");
+const path = require('path');
 
 module.exports = ({ env }) => {
-  // For production (Render)
+  // For production on Render
   if (env('NODE_ENV') === 'production') {
-    const config = parse(env('DATABASE_URL') || '');
     return {
       connection: {
         client: 'postgresql',
         connection: {
-          host: config.host,
-          port: config.port,
-          database: config.database,
-          user: config.user,
-          password: config.password,
+          host: env('DATABASE_HOST', 'localhost'),
+          port: env.int('DATABASE_PORT', 5432),
+          database: env('DATABASE_NAME', 'strapi'),
+          user: env('DATABASE_USERNAME', 'strapi'),
+          password: env('DATABASE_PASSWORD', 'strapi'),
           ssl: env.bool('DATABASE_SSL', false),
-        },
-        pool: {
-          min: 0,
-          max: 1
         },
         debug: false,
       },
@@ -29,7 +24,7 @@ module.exports = ({ env }) => {
     connection: {
       client: 'sqlite',
       connection: {
-        filename: env('DATABASE_FILENAME', '.tmp/data.db'),
+        filename: path.join(__dirname, '..', '.tmp/data.db'),
       },
       useNullAsDefault: true,
     },
